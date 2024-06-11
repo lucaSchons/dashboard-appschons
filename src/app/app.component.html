@@ -1,4 +1,21 @@
 <h1>Dashboard</h1>
 <ul>
-    <!-- <li>{{produtos}}</li> -->
+    
+    @for (produto of produtos | async; track produtos) {
+        <li>{{produto.user}}</li>
+        <li>{{produto.phone}}</li>
+        <li>{{produto.valor_total}}</li>
+        <ul>
+            @for (items of produto.items; track produtos) {
+            @for (item of items.produto; track produtos) {
+                <li>{{item.descricao_produto}}</li>
+                <li>{{item.quantity}}</li>
+                <li>{{item.valor_unitario_produto}}</li>
+            }
+            }   
+        </ul>
+
+    } @empty {
+        <p>No results yet!</p>
+    }
 </ul>
