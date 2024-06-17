@@ -1,0 +1,105 @@
+section {
+    margin-top: 15vh;
+}
+
+.container-head {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+    gap: 20px;
+    width: 40%;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+    margin: 25px;
+}
+
+.pedido {
+    display: flex;
+    border: 2px solid var(--grey-light);
+    border-radius: 10px;
+    flex-direction: column;
+    padding: 20px 30px;
+    gap: 8px;
+    width: 500px;
+}
+
+.pedido li {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--black-light);
+}
+
+.head-pedido {
+    display: flex;
+    justify-content: space-between;
+}
+
+.body-pedido {
+    padding: 5px 10px;
+}
+
+.body-pedido li {
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.itens-pedido {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 5px;
+    gap: 10px;
+}
+
+.active {
+    background-color: var(--grey-light);
+    span{
+        color: var(--primary);
+    }
+}
+
+.loading {
+    background-color: var(--grey-light);
+    border-radius: 10px;
+    height: 200px;
+    width: 550px;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.button-head {
+    border: 2px solid var(--grey-light);
+    border-radius: 10px;
+    color: var(--black-light);
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 10px 15px;
+}
+
+.container-button{
+    display: flex;
+    justify-content: center;
+}
+
+.button-update{
+    background: var(--blue);
+    border: none;
+    border-radius: 7px;
+    padding: 10px;
+    width: 80%;
+
+    span {
+        color: var(--primary);
+        font-size: 1rem;
+        font-weight: 600;
+        text-align: center;
+    }
+}

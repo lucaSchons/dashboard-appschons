@@ -10,5 +10,14 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideClientHydration(), provideFirebaseApp(() => initializeApp(environment.firebase)), provideAuth(() => getAuth()), provideAnalytics(() => getAnalytics()), ScreenTrackingService, UserTrackingService, provideFirestore(() => getFirestore())]
+  providers: 
+  [
+    provideRouter(routes), 
+    provideClientHydration(), 
+    provideFirebaseApp(() => initializeApp(environment.firebase)), 
+    // provideAuth(() => getAuth()), 
+    provideAnalytics(() => getAnalytics()), 
+    ScreenTrackingService, UserTrackingService, 
+    provideFirestore(() => getFirestore())
+  ]
 };

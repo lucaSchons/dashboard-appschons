@@ -1,21 +1,75 @@
-<h1>Dashboard</h1>
-<ul>
-    
-    @for (produto of produtos | async; track produtos) {
-        <li>{{produto.user}}</li>
-        <li>{{produto.phone}}</li>
-        <li>{{produto.valor_total}}</li>
-        <ul>
-            @for (items of produto.items; track produtos) {
-            @for (item of items.produto; track produtos) {
-                <li>{{item.descricao_produto}}</li>
-                <li>{{item.quantity}}</li>
-                <li>{{item.valor_unitario_produto}}</li>
-            }
-            }   
-        </ul>
+<section>
+    <div class="container-head">
+        <h1>Lista de Pedidos</h1>
+        <p>
+            Segue lista de pedidos abaixo, sendo que os mais antigos
+            estão listados em primeiro
+        </p>
+        <div class="button-group">
+            <button class="button-head" [class.active]="pedidoEmAberto" id="btn-all" (click)="obterPedidosEmAberto()"><span>Em aberto</span></button>
+            <button class="button-head" [class.active]="!pedidoEmAberto" (click)="obterPedidosFinalizados()"><span>Finalizado</span></button>
+        </div>
+    </div>
+    <div class="container">
+        @if (pedidoEmAberto) {
+            @for (pedido of pedidosFiltrados | async; track pedidosFiltrados) {
+                <ul class="pedido">
+                    @defer {
+                        <div class="head-pedido">
+                            <li><span>Cliente: </span>{{pedido.user}}</li>
+                            <li><span>Celular: </span>{{pedido.phone}}</li>
+                        </div>
+                        <li><span>Itens do Pedido: </span></li>
+                        <ul class="body-pedido">
+                            @for (items of pedido.items; track pedidosFiltrados) {
+                            @for (item of items.produto; track pedidosFiltrados) {
+                            <div class="itens-pedido">
+                                <li><span>Descrição: </span>{{item.descricao_produto}}</li>
+                                <li><span>Quantidade: </span>{{item.quantity}}</li>
+                            </div>
+                            }
+                            }
+                        </ul>
+                        <li><span>Total: R$ </span>{{pedido.valor_total}}</li>
+                        <div class="container-button">
+                            <button class="button-update" (click)="updateData(pedido.id, pedido)"><span>Finalizar Pedido</span></button>
+                        </div>
+                        
 
-    } @empty {
-        <p>No results yet!</p>
-    }
-</ul>
+                    } @loading (after 100ms; minimum 1s) {
+                        <div class="loading"></div>
+                    }
+                </ul>
+            }
+
+        } @else {
+
+            @for (pedido of pedidosFiltrados | async; track pedidosFiltrados) {
+                <ul class="pedido">
+                    @defer {
+                        <div class="head-pedido">
+                            <li><span>Cliente: </span>{{pedido.user}}</li>
+                            <li><span>Celular: </span>{{pedido.phone}}</li>
+                        </div>
+                        <li><span>Itens do Pedido: </span></li>
+                        <ul class="body-pedido">
+                            @for (items of pedido.items; track pedidosFiltrados) {
+                            @for (item of items.produto; track pedidosFiltrados) {
+                            <div class="itens-pedido">
+                                <li><span>Descrição: </span>{{item.descricao_produto}}</li>
+                                <li><span>Quantidade: </span>{{item.quantity}}</li>
+                            </div>
+                            }
+                            }
+                        </ul>
+                        <li><span>Total: R$ </span>{{pedido.valor_total}}</li>
+
+                    } @loading (after 100ms; minimum 1s){
+                        <div class="loading"></div>
+                    }
+
+                </ul>
+            }
+        }
+    </div>
+</section>
