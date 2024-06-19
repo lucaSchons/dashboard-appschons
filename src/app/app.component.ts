@@ -14,9 +14,11 @@ import { Observable, map } from 'rxjs';
 })
 export class AppComponent {
   title = 'dashboard-appschons';
-  
+
   variavel_pedidos!: Observable<any[]>;
   pedidosFiltrados!: Observable<any[]>;
+  teste!: Observable<any[]>;
+  pedidosOrdenados: any[] = [];
 
   pedidoEmAberto: boolean = true;
   pedidoFinalizado: boolean = false;
@@ -24,28 +26,43 @@ export class AppComponent {
   constructor(private firestore: Firestore) {
     const collectionProduto = collection(this.firestore, 'pedido_item');
     this.variavel_pedidos = collectionData(collectionProduto, { idField: 'id' });
-    this.pedidosFiltrados = this.variavel_pedidos.pipe(
+    this.teste = this.variavel_pedidos.pipe(
       map((pedidos: any[]) => pedidos.filter(pedido => pedido.status === 'aberto'))
     );
+    this.pedidosFiltrados = this.ordenarListaPorTimestamp(this.teste);
+
+  }
+
+  ordenarListaPorTimestamp(lista: Observable<any[]>) {
+     return lista.pipe( map (pedido => {
+      return pedido.sort((a, b) => {
+        const dateA = a.orderDate.toDate();
+        const dateB = b.orderDate.toDate();
+        return dateA.getTime() - dateB.getTime();
+      });
+    }))
   }
 
   obterPedidosEmAberto() {
     this.pedidoEmAberto = true;
     this.pedidoFinalizado = false;
-    this.pedidosFiltrados = this.variavel_pedidos.pipe(
+    this.teste = this.variavel_pedidos.pipe(
       map(pedidos => pedidos.filter(pedido => pedido.status === 'aberto'))
     );
+    this.pedidosFiltrados = this.ordenarListaPorTimestamp(this.teste);
   }
 
   obterPedidosFinalizados() {
     this.pedidoEmAberto = false;
     this.pedidoFinalizado = true;
-    this.pedidosFiltrados = this.variavel_pedidos.pipe(
+    this.teste = this.variavel_pedidos.pipe(
       map(pedidos => pedidos.filter(pedido => pedido.status === 'finalizado'))
     );
+    this.pedidosFiltrados = this.ordenarListaPorTimestamp(this.teste);
+
   }
 
-  updateData(id: string, pedido: any){
+  updateData(id: string, pedido: any) {
     const docInstance = doc(this.firestore, 'pedido_item', id);
     const updateData = {
       items: pedido.items,
@@ -56,12 +73,12 @@ export class AppComponent {
     }
 
     updateDoc(docInstance, updateData)
-    .then(() => {
-      console.log('atualizado porra!!!');
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-  } 
-  
+      .then(() => {
+        console.log('atualizado porra!!!');
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
 }
