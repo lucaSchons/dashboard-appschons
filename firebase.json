@@ -1,1 +1,11 @@
-{}
+{
+  "hosting": {
+    "site": "dashboard-merceariaschons",
+    "public": "dist/dashboard-appschons/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
