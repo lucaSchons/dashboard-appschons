@@ -25,10 +25,10 @@ export class AuthService {
         });    
     }
 
-    // logout(){
-    //     this.authChange.next(false);
-    //     this.router.navigate(['/login']);
-    // }
+    logout(){
+        this.authChange.next(false);
+        this.router.navigate(['/login']);
+    }
 
     isAuth(){
         return this.isAuthenticated;

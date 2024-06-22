@@ -4,6 +4,7 @@ import { Firestore, collection, collectionData, updateDoc } from '@angular/fire/
 import { RouterOutlet } from '@angular/router';
 import { doc } from 'firebase/firestore';
 import { Observable, map } from 'rxjs';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-order',
@@ -21,7 +22,7 @@ export class OrderComponent {
   pedidoEmAberto: boolean = true;
   pedidoFinalizado: boolean = false;
 
-  constructor(private firestore: Firestore) {
+  constructor(private firestore: Firestore, private authService: AuthService) {
     const collectionProduto = collection(this.firestore, 'pedido_item');
     this.variavel_pedidos = collectionData(collectionProduto, { idField: 'id' });
     this.teste = this.variavel_pedidos.pipe(
@@ -29,6 +30,10 @@ export class OrderComponent {
     );
     this.pedidosFiltrados = this.ordenarListaPorTimestamp(this.teste);
 
+  }
+
+  onLogout() {
+    this.authService.logout();
   }
 
   ordenarListaPorTimestamp(lista: Observable<any[]>) {
