@@ -1,5 +1,22 @@
-section {
-    margin-top: 15vh;
+.container-logout {
+    padding: 30px 45px 50px 45px;
+}
+
+.logout {
+    background: var(--blue);
+    border: none;
+    border-radius: 7px;
+    padding: 10px;
+    width: 125px;
+    &:hover{
+        cursor: pointer;
+    }
+    span {
+        color: var(--primary);
+        font-size: 1rem;
+        font-weight: 600;
+        text-align: center;
+    }
 }
 
 .container-head {
@@ -82,6 +99,9 @@ section {
     font-size: 1.2rem;
     font-weight: 600;
     padding: 10px 15px;
+    &:hover{
+        cursor: pointer;
+    }
 }
 
 .container-button{
@@ -95,7 +115,9 @@ section {
     border-radius: 7px;
     padding: 10px;
     width: 80%;
-
+    &:hover{
+        cursor: pointer;
+    }
     span {
         color: var(--primary);
         font-size: 1rem;
