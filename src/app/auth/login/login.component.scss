@@ -7,15 +7,16 @@ h1 {
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    margin-top: 35px;
+    margin: 0 auto;
+    max-width: 500px;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
+    padding: 50px;
+    width: 100%;
 }
 
 input {
@@ -23,7 +24,6 @@ input {
     border-radius: 8px;
     font-size: 1rem;
     padding: 15px 20px;
-    width: 400px;
 }
 
 button {
@@ -31,7 +31,6 @@ button {
     border: none;
     border-radius: 5px;
     padding: 10px;
-    width: 400px;
     &:hover{
         cursor: pointer;
     }
