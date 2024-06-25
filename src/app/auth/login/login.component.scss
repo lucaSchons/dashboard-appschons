@@ -1,0 +1,44 @@
+section {
+    margin-top: 15vh;
+}
+
+h1 {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 35px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input {
+    border: 2px solid var(--grey-light);
+    border-radius: 8px;
+    font-size: 1rem;
+    padding: 15px 20px;
+    width: 400px;
+}
+
+button {
+    background: var(--blue);
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 400px;
+    &:hover{
+        cursor: pointer;
+    }
+    span {
+        color: var(--primary);
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-align: center;
+    }
+}

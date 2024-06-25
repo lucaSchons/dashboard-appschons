@@ -1,7 +1,10 @@
 <section>
-    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-        <input placeholder="pat@example.com" formControlName="email">
-        <input type="password" placeholder="Your password" formControlName="password">
-        <button type="submit">Submit</button>
-    </form>
+    <h1>Login Dashboard Mercearia</h1>
+    <div class="container">
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <input placeholder="Digite o e-mail" formControlName="email">
+            <input type="password" placeholder="Digite a senha" formControlName="password">
+            <button type="submit"><span>Entrar</span></button>
+        </form>
+    </div>
 </section>
