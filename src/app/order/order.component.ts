@@ -16,8 +16,7 @@ import { AuthService } from '../auth.service';
 export class OrderComponent {
   variavel_pedidos!: Observable<any[]>;
   pedidosFiltrados!: Observable<any[]>;
-  teste!: Observable<any[]>;
-  pedidosOrdenados: any[] = [];
+  todospedidos!: Observable<any[]>;
 
   pedidoEmAberto: boolean = true;
   pedidoFinalizado: boolean = false;
@@ -25,11 +24,10 @@ export class OrderComponent {
   constructor(private firestore: Firestore, private authService: AuthService) {
     const collectionProduto = collection(this.firestore, 'pedido_item');
     this.variavel_pedidos = collectionData(collectionProduto, { idField: 'id' });
-    this.teste = this.variavel_pedidos.pipe(
+    this.todospedidos = this.variavel_pedidos.pipe(
       map((pedidos: any[]) => pedidos.filter(pedido => pedido.status === 'aberto'))
     );
-    this.pedidosFiltrados = this.ordenarListaPorTimestamp(this.teste);
-
+    this.pedidosFiltrados = this.ordenarListaPorTimestamp(this.todospedidos);
   }
 
   onLogout() {
@@ -49,19 +47,19 @@ export class OrderComponent {
   obterPedidosEmAberto() {
     this.pedidoEmAberto = true;
     this.pedidoFinalizado = false;
-    this.teste = this.variavel_pedidos.pipe(
+    this.todospedidos = this.variavel_pedidos.pipe(
       map(pedidos => pedidos.filter(pedido => pedido.status === 'aberto'))
     );
-    this.pedidosFiltrados = this.ordenarListaPorTimestamp(this.teste);
+    this.pedidosFiltrados = this.ordenarListaPorTimestamp(this.todospedidos);
   }
 
   obterPedidosFinalizados() {
     this.pedidoEmAberto = false;
     this.pedidoFinalizado = true;
-    this.teste = this.variavel_pedidos.pipe(
+    this.todospedidos = this.variavel_pedidos.pipe(
       map(pedidos => pedidos.filter(pedido => pedido.status === 'finalizado'))
     );
-    this.pedidosFiltrados = this.ordenarListaPorTimestamp(this.teste);
+    this.pedidosFiltrados = this.ordenarListaPorTimestamp(this.todospedidos);
 
   }
 
